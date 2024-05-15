@@ -1,5 +1,6 @@
 import { createConnection } from 'mysql2'
 
+//criando a conexão com o banco de dados
 const connection = createConnection({
    host: 'localhost',
    user: 'root',
@@ -7,6 +8,7 @@ const connection = createConnection({
    database: 'cadastrodb' 
 });
 
+//conectando ao banco de dados
 connection.connect((err) => {
     if (err) {
         console.log('Erro na conexão: ' + err.stack);
@@ -15,4 +17,5 @@ connection.connect((err) => {
     console.log('Conectado ao Banco de Dados');
 });
 
+//exportando a conexão
 export default connection;
