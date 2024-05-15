@@ -1,15 +1,12 @@
-import { randomUUID } from 'crypto';
-
 //importando as funções de CRUD do model.js
-import { create, read, deleteM } from '../models/model.js';
+import { create, read, update, deleteM } from '../models/model.js';
 
 //exportando a função assíncrona de criar cadastro
 export async function createMorador (req, res) {
-    const id = randomUUID();
     //recebendo os dados do body em formato json
-    const { nome, cpf, data_nascimento, genero, estado_civil, telefone, email, cep } = req.body;
+    const { dadosCadastro } = req.body;
     //usando a função create com os parâmetros requisitados para criar o registro
-    create(id, nome, cpf, data_nascimento, genero, estado_civil, telefone, email, cep, (err, result) => {
+    create(dadosCadastro, (err, result) => {
         if (err) {
             res.status(500).send({ message: 'Ocorreu um erro no servidor que impediu o cadastro do morador. ', error: err });
         }
@@ -28,8 +25,19 @@ export async function readMoradores (req, res) {
     });
 };
 
+//exportando função assíncrona para atualizar os dados de cadastro
 export async function updateMorador (req, res) {
-    console.log('a');
+    //requisitando o id do parâmetro de rota
+    const { id } = req.params;
+    //requisitando os dados de alteração do body
+    const novosDados = req.body;
+
+    update(id, novosDados, (err, result) => {
+        if (err) {
+            res.status(500).send({ message: 'Erro na atualização do cadastro.' });
+        }
+        res.status(200).send({ message: 'Atualização feita com sucesso.' });
+    });
 };
 
 //exportando a função para inativar o cadastro
