@@ -1,4 +1,4 @@
-import { createConnection } from 'mysql2'
+import { createConnection } from 'mysql2';
 
 //criando a conexão com o banco de dados
 const connection = createConnection({

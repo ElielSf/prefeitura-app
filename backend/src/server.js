@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-//rotas de CRUD
+//rotas de CRUD que levam para o controller
 app.post('cadastrar/moradores', createMorador);
 app.get('exibir/moradores', readMoradores);
 app.put('/moradores/:id', updateMorador);
