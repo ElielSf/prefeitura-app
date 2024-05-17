@@ -3,4 +3,34 @@
     height: 10vh;
     
     display: flex;
+    text-align: center;
+    
+    background-color: #8BA5FF;
+}
+
+.Header_logo {
+    margin-right: auto;
+    margin-left: 25px;
+    font-size: 1.3rem;
+    padding: 1%;
+}
+
+.Header_register {
+    font-size: 1.3rem;
+    padding: 2.4%;
+}
+
+.Header_delete {
+    font-size: 1.3rem;
+    padding: 1%;
+}
+
+.Header_register:hover, .Header_delete:hover {
+    background-color: rgb(255, 255, 255, 0.2);
+}
+
+.Header_logo, .Header_register, .Header_delete {
+    width: 20%;
+    height: 100%;
+    text-align: center;
 }

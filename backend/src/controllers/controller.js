@@ -4,11 +4,12 @@ import { create, read, update, deleteM } from '../models/model.js';
 //exportando a função assíncrona de criar cadastro
 export async function createMorador (req, res) {
     //recebendo os dados do body em formato json
-    const { dadosCadastro } = req.body;
+    const dadosCadastro = req.body;
     //usando a função create com os parâmetros requisitados para criar o registro
     create(dadosCadastro, (err, result) => {
         if (err) {
-            res.status(500).send({ message: 'Ocorreu um erro no servidor que impediu o cadastro do morador. ', error: err });
+            res.status(500).send({ message: 'Ocorreu um erro no servidor que impediu o cadastro do morador. ', error: err.stack });
+            return;
         }
         res.status(201).send({ message: 'Morador cadastrado no banco de dados com sucesso.', data: result });
     });
@@ -20,6 +21,7 @@ export async function readMoradores (req, res) {
     read((err, result) => {
         if (err) {
             res.status(500).send({ message: 'Erro na leitura dos dados dos moradores.', error: err});
+            return;
         }
         res.status(200).send({ message: 'Leitura dos dados realizada com sucesso.', data: result });
     });
@@ -35,6 +37,7 @@ export async function updateMorador (req, res) {
     update(id, novosDados, (err, result) => {
         if (err) {
             res.status(500).send({ message: 'Erro na atualização do cadastro.' });
+            return;
         }
         res.status(200).send({ message: 'Atualização feita com sucesso.' });
     });
@@ -48,6 +51,7 @@ export async function deleteMorador (req, res) {
     deleteM(id_morador, (err, result) => {
         if (err) {
             res.status(500).send({ message: 'Erro ao deletar o morador do banco de dados.', error: err });
+            return;
         }
         res.status(200).send({ message: 'O morador foi inativado no banco de dados.', data: result });
     });

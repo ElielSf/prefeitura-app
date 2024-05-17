@@ -1,9 +1,16 @@
-import './css/App.css'
+import Header from './components/Header/Header.jsx';
+
+import { Outlet } from 'react-router-dom';
+
+import './css/App.css';
 
 export default function App() {
   return (
       <div>
-        <p>a</p>
+        <Header />
+        <Outlet />
       </div>
   )
 }
+
+//<Routes path='/' element={}/>
