@@ -1,0 +1,33 @@
+.Control {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Control_box {
+    width: 90%;
+    height: 70%;
+    padding-top: 1%;
+    overflow: scroll;
+    border: 1px solid black;
+
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    font-size: 0.8em;
+    background-color: darksalmon;
+}
+
+.Control_card {
+    width: 30%;
+    height: 70%;
+    padding: 1%;
+    
+    text-align: left;
+    background-color: rgb(179, 245, 218);
+}

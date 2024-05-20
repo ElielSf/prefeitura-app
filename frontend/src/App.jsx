@@ -7,10 +7,8 @@ import './css/App.css';
 export default function App() {
   return (
       <div>
-        <Header />
-        <Outlet />
+        <header><Header /></header>
+        <main><Outlet /></main>
       </div>
   )
 }
-
-//<Routes path='/' element={}/>

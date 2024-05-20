@@ -1,36 +1,46 @@
 .Header {
-    width: 100vw;
-    height: 10vh;
+    width: 100%;
+    height: 100%;
     
-    display: flex;
-    text-align: center;
+    display: grid;
+    grid-template-columns: 0.2fr 1fr 5fr 1fr 1fr 0.2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: '. logo . register control .';
     
-    background-color: #8BA5FF;
+    background-color: #8ba5ff;
 }
 
 .Header_logo {
-    margin-right: auto;
-    margin-left: 25px;
-    font-size: 1.3rem;
-    padding: 1%;
+    grid-area: logo;
 }
 
 .Header_register {
-    font-size: 1.3rem;
-    padding: 2.4%;
+    grid-area: register;
 }
 
-.Header_delete {
-    font-size: 1.3rem;
-    padding: 1%;
+.Header_control {
+    grid-area: control;
 }
 
-.Header_register:hover, .Header_delete:hover {
-    background-color: rgb(255, 255, 255, 0.2);
+.Header_logo:hover, .Header_register:hover, .Header_control:hover {
+    transition: all ease 0.75s;
+    background-color: rgba(73, 103, 211, 0.8);
+    border: 3px solid rgb(255, 255, 255);
 }
 
-.Header_logo, .Header_register, .Header_delete {
-    width: 20%;
+.Header_logo, .Header_register, .Header_control {
+    width: 100%;
     height: 100%;
+    border-radius: 10px;
     text-align: center;
+    place-content: center;
+    align-self: center;
+    cursor: pointer;
+
+    color: rgb(255, 255, 255);
+}
+
+.Header_logo:focus, .Header_register:focus, .Header_control:focus{
+    border: 2px solid rgb(58, 91, 211);
+    background-color: rgb(58, 91, 211, 0.8);
 }

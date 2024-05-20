@@ -23,18 +23,18 @@ export async function readMoradores (req, res) {
             res.status(500).send({ message: 'Erro na leitura dos dados dos moradores.', error: err});
             return;
         }
-        res.status(200).send({ message: 'Leitura dos dados realizada com sucesso.', data: result });
+        res.status(200).send(result);
     });
 };
 
 //exportando função assíncrona para atualizar os dados de cadastro
 export async function updateMorador (req, res) {
     //requisitando o id do parâmetro de rota
-    const { id } = req.params;
+    const { id_morador } = req.params.id;
     //requisitando os dados de alteração do body
     const novosDados = req.body;
 
-    update(id, novosDados, (err, result) => {
+    update(id_morador, novosDados, (err, result) => {
         if (err) {
             res.status(500).send({ message: 'Erro na atualização do cadastro.' });
             return;
@@ -46,7 +46,7 @@ export async function updateMorador (req, res) {
 //exportando a função para inativar o cadastro
 export async function deleteMorador (req, res) {
     //requisitando o id do cadastro a ser inativado
-    const id_morador = req.body.id_morador;
+    const id_morador = req.params.id;
     //usando a função deleteM com o parâmetro requisitado para inativar o cadastro no banco de dados
     deleteM(id_morador, (err, result) => {
         if (err) {
