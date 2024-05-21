@@ -1,31 +1,35 @@
+import './css/index.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './css/index.css';
 
 import App from './App.jsx';
+import Home from './components/Home/Home.jsx';
 import Register from './components/Register/Register.jsx';
 import Control from './components/Control/Control.jsx';
-import Modification from './components/Modification/Modification.jsx'
+import Error from './components/Error/Error.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    //componente de erro
-    //errorElement: < />
+    errorElement: < Error/>,
     children: [
       {
+        path: '/',
+        element: <Home />,
+        errorElement: <Error />
+      },
+      {
         path: '/cadastrar',
-        element: <Register />
+        element: <Register />,
+        errorElement: <Error />
       },
       {
         path: '/controle',
-        element: <Control />
-      },
-      {
-        path: '/modificar',
-        element: <Modification />      
+        element: <Control />,
+        errorElement: <Error />
       }
     ]
   },

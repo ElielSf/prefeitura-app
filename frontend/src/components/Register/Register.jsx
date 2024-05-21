@@ -30,6 +30,7 @@ export default function Register() {
     const handleAdress = async () => {
         const data = await fetch(`https://viacep.com.br/ws/${dadosCadastro.cep_morador}/json/`);
         const adress = await data.json();
+
         if (adress.erro & adress.erro == true) {
             setError(true);
         } else {
@@ -47,24 +48,7 @@ export default function Register() {
     }
 
     const handleSubmit = async (e) => {
-        if (state === null) {
-            try {
-                e.preventDefault();
-                await handleAdress();
-    
-                const response = await fetch('http://localhost:3000/cadastrar/moradores', {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json'
-                    },
-                    body: JSON.stringify(dadosCadastro)
-                });
-                const json = await response.json();
-                console.log(json)
-            } catch (err) {
-                console.log(err);
-            }
-        } else {
+        if (state !== null) {
             try {
                 e.preventDefault();
                 await handleAdress();
@@ -81,13 +65,30 @@ export default function Register() {
             } catch (err) {
                 console.log(err);
             }
+        } else {
+            try {
+                e.preventDefault();
+                await handleAdress();
+    
+                const response = await fetch('http://localhost:3000/cadastrar/moradores', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify(dadosCadastro)
+                });
+                const json = await response.json();
+                console.log(json)
+            } catch (err) {
+                console.log(err);
+            }
         }
-        
     }
 
     return (
         <div className='Register'>
-            <h1 className='Register_title'>Cadastro de Morador</h1>
+            <h1 className='Register_title'>{state ? (`Modificação de Morador - ID: ${state}`) : ('Cadastro de Morador')}</h1>
+            {error && (<h2 className='Register_error'>Erro no CEP digitado</h2>)}
             <form className='Form' id='form-register' onSubmit={handleSubmit}>
                 <input type='text'
                 className='Form_input' 
@@ -98,13 +99,14 @@ export default function Register() {
                 title='Campo de nome completo'
                 required/>
 
-                <input type='number'
+                <input type='text'
                 className='Form_input' 
                 name='cpf_morador'
                 value={dadosCadastro.cpf_morador} 
                 onChange={handleChange} 
-                placeholder='CPF (somente números)'
+                placeholder='CPF (Formato: 12345678987)'
                 title='Campo de cpf'
+                maxLength='11'
                 required/>
 
                 <input type={type}

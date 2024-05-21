@@ -1,0 +1,19 @@
+.Error {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.Error_title {
+    font-size: 3em;
+}
+
+.Error_text {
+    font-size: 1em;
+}

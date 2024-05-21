@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function Control() {
     const [moradores, setMoradores] = useState([]);
-    const [selecionarCard, setSelecionarCard] = useState({});
+    const [selecionarCard, setSelecionarCard] = useState();
     
     useEffect(() => {
         const dataFetch = async () => {
@@ -55,7 +55,8 @@ export default function Control() {
             <div className='Control_box'>
                 {moradores.map((morador) => {
                     return (
-                        <div className='Control_card' key={morador.id_morador} onClick={() => handleClick(morador.id_morador)}>
+                        <div className={selecionarCard === morador.id_morador ? ('Control_card-selected') : ('Control_card-unselected')} key={morador.id_morador} onClick={() => handleClick(morador.id_morador)}>
+                            <h3 className='card_data'>ID: {morador.id_morador}</h3>
                             <h3 className='card_data'>CPF: {morador.cpf_morador}</h3>
                             <h3 className='card_data'>Nome Completo: {morador.nome_morador}</h3>
                             <h3 className='card_data'>Data de nascimento: {morador.data_nascimento_morador}</h3>
@@ -69,13 +70,14 @@ export default function Control() {
                             <h3 className='card_data'>Cidade: {morador.cidade_endereco}</h3>
                             <h3 className='card_data'>Bairro: {morador.bairro_endereco}</h3>
                             <h3 className='card_data'>Rua: {morador.logradouro_endereco}</h3>
-                            {selecionarCard === morador.id_morador ? ('s') : ('n')}
                         </div>
                     )
                 })}
             </div> 
-            <button className={selecionarCard ? 'Control_button-del' : 'Control_button-del-disable'} onClick={handleDelete}>Apagar</button>
-            <Link className={selecionarCard ? 'Control_button-mod' : 'Control_button-mod-disable'} to='/cadastrar' state={selecionarCard}>Modificar</Link>            
+            <div className='Control_button'>
+                <button className={selecionarCard ? 'Control_button-del' : 'Control_button-del-disable'} onClick={handleDelete}>Apagar</button>
+                <Link className={selecionarCard ? 'Control_button-mod' : 'Control_button-mod-disable'} to='/cadastrar' state={selecionarCard}>Modificar</Link>          
+            </div>
         </div>
     )
 }

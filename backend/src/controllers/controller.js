@@ -30,16 +30,16 @@ export async function readMoradores (req, res) {
 //exportando função assíncrona para atualizar os dados de cadastro
 export async function updateMorador (req, res) {
     //requisitando o id do parâmetro de rota
-    const { id_morador } = req.params.id;
+    const id_morador = req.params.id;
     //requisitando os dados de alteração do body
     const novosDados = req.body;
-
-    update(id_morador, novosDados, (err, result) => {
+    
+    update(novosDados, id_morador, (err, result) => {
         if (err) {
             res.status(500).send({ message: 'Erro na atualização do cadastro.' });
             return;
         }
-        res.status(200).send({ message: 'Atualização feita com sucesso.' });
+        res.status(200).send({ message: 'Atualização feita com sucesso.', data: result });
     });
 };
 

@@ -8,7 +8,7 @@ export function create(dadosCadastro, callback) {
 
 //exportando a função de leitura de dados do banco de dados
 export function read(callback) {
-    connection.query('SELECT * FROM morador WHERE ativo_morador = 1', (err, result) => {
+    connection.query('SELECT * FROM morador WHERE ativo_morador = 1 ORDER BY id_morador DESC', (err, result) => {
         if (err) {
             callback(err, result);
         }
@@ -18,8 +18,8 @@ export function read(callback) {
 }
 
 //exportando a função de atualização de cadastro no banco de dados
-export function update(id, novosDados, callback) {
-    connection.query('UPDATE morador SET ? WHERE id_morador = ?', [novosDados, id], callback);
+export function update(novosDados, id_morador, callback) {
+    connection.query('UPDATE morador SET ? WHERE id_morador = ?', [novosDados, id_morador], callback);
 }
 
 //exportando a função de deletar(inativar) o registro no banco de dados 

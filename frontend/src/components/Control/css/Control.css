@@ -8,26 +8,100 @@
     align-items: center;
 }
 
+.Control_title {
+    margin-bottom: 2%;
+}
+
 .Control_box {
     width: 90%;
     height: 70%;
     padding-top: 1%;
     overflow: scroll;
-    border: 1px solid black;
+    scrollbar-width: none;
+    border: 3px solid rgb(129, 129, 129);
 
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 
     font-size: 0.8em;
-    background-color: darksalmon;
+    background-color: white;
 }
 
-.Control_card {
+.Control_card-selected, .Control_card-unselected {
     width: 30%;
-    height: 70%;
+    max-width: 300px;
+    height: auto;
     padding: 1%;
-    
+    margin: 1%;
     text-align: left;
-    background-color: rgb(179, 245, 218);
+
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
+}
+
+.Control_card-selected {
+    transition: all ease 0.3s;
+    background-color: rgb(0, 211, 130);
+}
+
+.Control_card-unselected {
+    background-color: rgb(34, 218, 218);
+}
+
+.Control_button {
+    width: 50%;
+    height: auto;
+    margin-top: 1%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Control_button-del, 
+.Control_button-mod, 
+.Control_button-del-disable, 
+.Control_button-mod-disable {
+    width: 25%;
+    height: 6vh;
+    margin: 1%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;  
+    font-size: 1em; 
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.3);
+}
+
+.Control_button-del-disable {
+    background-color: #ad7e7e;
+}
+
+.Control_button-mod-disable {
+    background-color: #8a9ebb;
+}
+
+.Control_button-del {
+    background-color: #ff0000;
+}
+
+.Control_button-del:hover {
+    background-color: #750000;
+} 
+
+.Control_button-mod {
+    background-color: #0066ff;
+}
+
+.Control_button-mod:hover {
+    background-color: #003481;
 }
