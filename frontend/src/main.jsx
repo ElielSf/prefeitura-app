@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.jsx';
 import Home from './components/Home/Home.jsx';
 import Register from './components/Register/Register.jsx';
+import RegisterTest from './components/Register copy/RegisterTest.jsx'
 import Control from './components/Control/Control.jsx';
 import Error from './components/Error/Error.jsx';
 
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/cadastrar',
-        element: <Register />,
+        element: <RegisterTest />,
         errorElement: <Error />
       },
       {

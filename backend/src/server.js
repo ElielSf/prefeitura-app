@@ -20,6 +20,7 @@ app.get('/exibir/moradores', readMoradores);
 app.put('/moradores/:id', updateMorador);
 app.delete('/moradores/:id', deleteMorador);
 
+//comando 'npm run dev' para rodar
 try {
     app.listen(PORT, (err) => {
         console.log(`Servidor rodando em http://localhost:${PORT}`);
