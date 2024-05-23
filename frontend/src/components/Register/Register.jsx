@@ -5,7 +5,7 @@ import './css/Register.css';
 export default function Register() {
     const [type, setType] = useState('text');
     const [success, setSuccess] = useState(false);
-    //variável que caso seja diferente de null faz uma requisição do tipo update
+    //variável que caso seja diferente de null faz uma requisição do tipo put
     const { state } = useLocation();
     const [dadosCadastro, setDadosCadastro] = useState({
         nome_morador: '',
@@ -24,17 +24,20 @@ export default function Register() {
     }
 
     const handleSubmit = async (e) => {
-        if (state) {
+        console.log('state:' + state);
+        if (state === null) {
             try {
                 e.preventDefault();
     
-                const response = await fetch('http://localhost:3000/cadastrar/moradores', {
+                const response_post = await fetch('http://localhost:3000/cadastrar/moradores', {
                     method: 'POST',
                     headers: {
                         'Content-type': 'application/json'
                     },
                     body: JSON.stringify(dadosCadastro)
                 });
+                const json_post = await response_post.json();
+                console.log(json_post);
                 const json = await response.json();
                 console.log(json);
                 setSuccess(true);
@@ -46,13 +49,15 @@ export default function Register() {
             try {
                 e.preventDefault();
     
-                const response = await fetch(`http://localhost:3000/cadastrar/moradores/${state}`, {
+                const response_put = await fetch(`http://localhost:3000/moradores/${state}`, {
                     method: 'PUT',
                     headers: {
-                        'Content-type': 'application/json'
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(dadosCadastro)
                 });
+                const json_put = await response_put.json();
+                console.log(json_put);
                 const json = await response.json();
                 console.log(json);
                 setSuccess(true);
@@ -67,8 +72,8 @@ export default function Register() {
     return (
         <div className='Register'>
             <h1 className='Register_title'>{state ? (`Modificação de Morador - ID: ${state}`) : ('Cadastro de Morador')}</h1>
-            {(state === null && success === true) && (<h5>Cadastro feito com sucesso!</h5>)}
-            {(state !== null && success === true) && (<h5>Modificação feita com sucesso!</h5>)}
+            {(state === null && success) && (<h5>Cadastro feito com sucesso!</h5>)}
+            {(state !== null && success) && (<h5>Modificação feita com sucesso!</h5>)}
             <form className='Form' id='form-register' onSubmit={handleSubmit}>
                 <input type='text' 
                 className='Form_input' 
@@ -123,7 +128,7 @@ export default function Register() {
                 name='telefone_morador'
                 value={dadosCadastro.telefone_morador} 
                 onChange={handleChange} 
-                placeholder='Telefone (Formato: 11-32222-3333'
+                placeholder='Telefone (Formato: 75-32222-3333)'
                 title='Campo de telefone'
                 pattern='[0-9]{2}-[0-9]{5}-[0-9]{4}'
                 required/>

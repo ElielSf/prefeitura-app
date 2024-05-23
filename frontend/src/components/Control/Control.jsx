@@ -3,9 +3,13 @@ import './css/Control.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import { FaUserCog } from "react-icons/fa";
+import { SlExclamation } from "react-icons/sl";
+
 export default function Control() {
     const [moradores, setMoradores] = useState([]);
     const [selecionarCard, setSelecionarCard] = useState();
+    const [atualizar, setAtualizar] = useState(false);
     
     useEffect(() => {
         const dataFetch = async () => {
@@ -19,12 +23,17 @@ export default function Control() {
                 const json = await response.json();
                 setMoradores(json);
                 console.log(json);
+                atualizarTela();
             } catch (err) {
                 console.log(err);
             }
         }
         dataFetch();
-    }, []); 
+    }, [atualizar]); 
+
+    const atualizarTela = () => {
+        setAtualizar(!atualizar);
+    }
 
     const handleClick = (id) => {
         setSelecionarCard(selecionarCard === id ? null : id);
@@ -41,8 +50,9 @@ export default function Control() {
                 });
                 const json = await response.json();
                 console.log(response);
-                console.log(json)
+                console.log(json);
                 setSelecionarCard(null);
+                atualizarTela();
             } catch (err) {
                 console.log(err);
             }
@@ -71,8 +81,8 @@ export default function Control() {
                 })}
             </div> 
             <div className='Control_button'>
-                <button className={selecionarCard ? 'Control_button-del' : 'Control_button-del-disable'} onClick={handleDelete}>Apagar</button>
-                <Link className={selecionarCard ? 'Control_button-mod' : 'Control_button-mod-disable'} to='/cadastrar' state={selecionarCard}>Modificar</Link>          
+                <button className={selecionarCard ? 'Control_button-del' : 'Control_button-del-disable'} onClick={handleDelete}><SlExclamation /> Apagar</button>
+                <Link className={selecionarCard ? 'Control_button-mod' : 'Control_button-mod-disable'} to='/cadastrar' state={selecionarCard}><FaUserCog />Modificar</Link>          
             </div>
         </div>
     )

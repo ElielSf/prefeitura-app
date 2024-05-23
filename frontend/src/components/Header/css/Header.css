@@ -44,3 +44,9 @@
     border: 2px solid rgb(58, 91, 211);
     background-color: rgb(58, 91, 211, 0.8);
 }
+
+@media (max-width: 720px) {
+    .Header_register, .Header_control {
+        font-size: 1em;
+    }
+}

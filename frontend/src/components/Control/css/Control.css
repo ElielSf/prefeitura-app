@@ -30,9 +30,10 @@
 
 .Control_card-selected, .Control_card-unselected {
     width: 30%;
+    min-width: 160px;
     max-width: 300px;
     height: 100%;
-    max-height: 300px;
+    max-height: 250px;
     padding: 1%;
     margin: 1%;
     text-align: left;
@@ -106,4 +107,12 @@
 
 .Control_button-mod:hover {
     background-color: #003481;
+}
+
+@media (max-width: 720px) {
+    .Control_card-selected, .Control_card-unselected {
+        font-size: 0.8em;
+        max-height: 210px;
+        padding: 2%;
+    }
 }

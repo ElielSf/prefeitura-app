@@ -1,6 +1,6 @@
 # Aplicativo de Criação e Manipulação de Cadastros
 
-Este aplicativo tem o objetivo promover a criação de cadastros de munícipes para uam prefeitura fictícia.
+Este aplicativo tem o objetivo promover a criação de cadastros de munícipes para uma prefeitura fictícia.
 
 Este aplicativo é capaz de:
 - Cadastrar novos munícipes;
