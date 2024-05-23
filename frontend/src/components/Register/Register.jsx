@@ -4,6 +4,7 @@ import './css/Register.css';
 
 export default function Register() {
     const [type, setType] = useState('text');
+    const [success, setSuccess] = useState(false);
     //variável que caso seja diferente de null faz uma requisição do tipo update
     const { state } = useLocation();
     const [dadosCadastro, setDadosCadastro] = useState({
@@ -36,8 +37,10 @@ export default function Register() {
                 });
                 const json = await response.json();
                 console.log(json);
+                setSuccess(true);
             } catch (err) {
                 console.log(err);
+                setSuccess(false);
             }
         } else {
             try {
@@ -52,8 +55,10 @@ export default function Register() {
                 });
                 const json = await response.json();
                 console.log(json);
+                setSuccess(true);
             } catch (err) {
                 console.log(err);
+                setSuccess(false);
             }
         }
         
@@ -62,6 +67,8 @@ export default function Register() {
     return (
         <div className='Register'>
             <h1 className='Register_title'>{state ? (`Modificação de Morador - ID: ${state}`) : ('Cadastro de Morador')}</h1>
+            {(state === null && success === true) && (<h5>Cadastro feito com sucesso!</h5>)}
+            {(state !== null && success === true) && (<h5>Modificação feita com sucesso!</h5>)}
             <form className='Form' id='form-register' onSubmit={handleSubmit}>
                 <input type='text' 
                 className='Form_input' 
