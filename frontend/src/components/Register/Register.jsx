@@ -14,6 +14,8 @@ export default function Register() {
         estado_civil_morador: '',
         telefone_morador: '',
         email_morador: '',
+    });
+    const [dadosEndereco, setDadosEndereco] = useState({
         cep_morador: '',
         estado_endereco: '',
         cidade_endereco: '',
@@ -21,29 +23,37 @@ export default function Register() {
         logradouro_endereco: '',
         ddd_endereco: ''
     });
+    const [dadosTotais, setDadosTotais] = useState({});
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setDadosCadastro(prevState => ({ ...prevState, [name]: value}));
     }
 
+    const handleChangeEnd = (e) => {
+        const { name, value } = e.target;
+        setDadosEndereco(prevState => ({ ...prevState, [name]: value}));
+    }
+
     const handleAdress = async () => {
-        const data = await fetch(`https://viacep.com.br/ws/${dadosCadastro.cep_morador}/json/`);
+        const data = await fetch(`https://viacep.com.br/ws/${dadosEndereco.cep_morador}/json/`);
         const adress = await data.json();
 
         if (adress.erro & adress.erro == true) {
             setError(true);
         } else {
             setError(false);
-            setDadosCadastro(prevState => ({ 
-                ...prevState, 
+            setDadosEndereco({
                 estado_endereco: adress.uf,
                 cidade_endereco: adress.localidade,
                 bairro_endereco: adress.bairro,
                 logradouro_endereco: adress.logradouro,
                 ddd_endereco: adress.ddd
-            }));
+            });
+            setDadosTotais(...dadosCadastro, ...dadosEndereco);
+            console.log(dadosEndereco);
             console.log(dadosCadastro);
+            console.log(dadosTotais);
         }
     }
 
@@ -160,8 +170,8 @@ export default function Register() {
                 <input type='text'
                 className='Form_input' 
                 name='cep_morador'
-                value={dadosCadastro.cep_morador} 
-                onChange={handleChange} 
+                value={dadosEndereco.cep_morador} 
+                onChange={handleChangeEnd} 
                 placeholder='CEP (Formato: 1234567)'
                 title='Campo de cep'
                 maxLength='8'
