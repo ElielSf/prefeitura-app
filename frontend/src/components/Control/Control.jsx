@@ -66,10 +66,6 @@ export default function Control() {
                             <h3 className='card_data'>Telefone: {morador.telefone_morador}</h3>
                             <h3 className='card_data'>Email: {morador.email_morador}</h3>
                             <h3 className='card_data'>CEP: {morador.cep_morador}</h3>
-                            <h3 className='card_data'>Estado: {morador.estado_endereco}</h3>
-                            <h3 className='card_data'>Cidade: {morador.cidade_endereco}</h3>
-                            <h3 className='card_data'>Bairro: {morador.bairro_endereco}</h3>
-                            <h3 className='card_data'>Rua: {morador.logradouro_endereco}</h3>
                         </div>
                     )
                 })}

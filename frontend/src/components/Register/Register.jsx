@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 import './css/Register.css';
 
 export default function Register() {
-    const [error, setError] = useState(false);
     const [type, setType] = useState('text');
+    //variável que caso seja diferente de null faz uma requisição do tipo update
     const { state } = useLocation();
     const [dadosCadastro, setDadosCadastro] = useState({
         nome_morador: '',
@@ -14,12 +14,7 @@ export default function Register() {
         estado_civil_morador: '',
         telefone_morador: '',
         email_morador: '',
-        cep_morador: '',
-        estado_endereco: '',
-        cidade_endereco: '',
-        bairro_endereco: '',
-        logradouro_endereco: '',
-        ddd_endereco: ''
+        cep_morador: ''
     });
 
     const handleChange = (e) => {
@@ -27,34 +22,13 @@ export default function Register() {
         setDadosCadastro(prevState => ({ ...prevState, [name]: value}));
     }
 
-    const handleAdress = async () => {
-        const data = await fetch(`https://viacep.com.br/ws/${dadosCadastro.cep_morador}/json/`);
-        const adress = await data.json();
-
-        if (adress.erro & adress.erro == true) {
-            setError(true);
-        } else {
-            setError(false);
-            setDadosCadastro(prevState => ({ 
-                ...prevState, 
-                estado_endereco: adress.uf,
-                cidade_endereco: adress.localidade,
-                bairro_endereco: adress.bairro,
-                logradouro_endereco: adress.logradouro,
-                ddd_endereco: adress.ddd
-            }));
-            console.log(dadosCadastro);
-        }
-    }
-
     const handleSubmit = async (e) => {
-        if (state !== null) {
+        if (state) {
             try {
                 e.preventDefault();
-                await handleAdress();
     
-                const response = await fetch(`http://localhost:3000/moradores/${state}`, {
-                    method: 'PUT',
+                const response = await fetch('http://localhost:3000/cadastrar/moradores', {
+                    method: 'POST',
                     headers: {
                         'Content-type': 'application/json'
                     },
@@ -68,29 +42,28 @@ export default function Register() {
         } else {
             try {
                 e.preventDefault();
-                await handleAdress();
     
-                const response = await fetch('http://localhost:3000/cadastrar/moradores', {
-                    method: 'POST',
+                const response = await fetch(`http://localhost:3000/cadastrar/moradores/${state}`, {
+                    method: 'PUT',
                     headers: {
                         'Content-type': 'application/json'
                     },
                     body: JSON.stringify(dadosCadastro)
                 });
                 const json = await response.json();
-                console.log(json)
+                console.log(json);
             } catch (err) {
                 console.log(err);
             }
         }
+        
     }
 
     return (
         <div className='Register'>
             <h1 className='Register_title'>{state ? (`Modificação de Morador - ID: ${state}`) : ('Cadastro de Morador')}</h1>
-            {error && (<h2 className='Register_error'>Erro no CEP digitado</h2>)}
             <form className='Form' id='form-register' onSubmit={handleSubmit}>
-                <input type='text'
+                <input type='text' 
                 className='Form_input' 
                 name='nome_morador'
                 value={dadosCadastro.nome_morador} 
@@ -99,7 +72,7 @@ export default function Register() {
                 title='Campo de nome completo'
                 required/>
 
-                <input type='text'
+                <input type='text' 
                 className='Form_input' 
                 name='cpf_morador'
                 value={dadosCadastro.cpf_morador} 
@@ -109,7 +82,7 @@ export default function Register() {
                 maxLength='11'
                 required/>
 
-                <input type={type}
+                <input type={type} 
                 className='Form_input' 
                 name='data_nascimento_morador'
                 value={dadosCadastro.data_nascimento_morador} 
@@ -118,7 +91,7 @@ export default function Register() {
                 title='Campo de data de nascimento'
                 onFocus={() => setType('date')} 
                 onBlur={() => setType('text')}
-                required/>
+                required/> 
 
                 <input type='text'
                 className='Form_input' 
@@ -168,7 +141,6 @@ export default function Register() {
                 required/>
             </form>
             <button className='Form_button' type='submit' form='form-register'>Enviar</button>
-            {error == true ? (<h3 className='error-message'>Erro no CEP digitado</h3>) : (null)}
         </div>
     )
 }
