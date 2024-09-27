@@ -1,11 +1,11 @@
-import { createConnection } from 'mysql2';
+import { createPool } from 'mysql2/promise';
 
 //criando a conexão com o banco de dados
-const connection = createConnection({
-   host: 'localhost',
-   user: 'root',
-   password: 'root',
-   database: 'cadastrodb' 
+const connection = createPool({
+   host: process.env.HOST,
+   user: process.env.USER,
+   password: process.env.PASSWORD,
+   database: process.env.DATABASE 
 });
 
 //conectando ao banco de dados

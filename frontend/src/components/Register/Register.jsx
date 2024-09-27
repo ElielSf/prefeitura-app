@@ -29,7 +29,7 @@ export default function Register() {
             try {
                 e.preventDefault();
     
-                const response_post = await fetch('http://localhost:3000/cadastrar/moradores', {
+                const response_post = await fetch('http://localhost:3000/moradores/cadastrar', {
                     method: 'POST',
                     headers: {
                         'Content-type': 'application/json'

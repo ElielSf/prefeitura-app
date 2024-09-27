@@ -15,8 +15,8 @@ app.use(express.json());
 app.use(cors());
 
 //rotas de CRUD que levam para o controller
-app.post('/cadastrar/moradores', createMorador);
-app.get('/exibir/moradores', readMoradores);
+app.post('/moradores/cadastrar', createMorador);
+app.get('/moradores/exibir', readMoradores);
 app.put('/moradores/:id', updateMorador);
 app.delete('/moradores/:id', deleteMorador);
 
