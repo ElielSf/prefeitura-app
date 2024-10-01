@@ -5,7 +5,7 @@ import cors from 'cors';
 import { createMorador, readMoradores, updateMorador, deleteMorador } from './controllers/controller.js';
 
 //usando o dotenv para variáveis de ambiente
-const PORT = process.env.PORT ?? 3000;
+const PORT = process.env.PORT;
 //criando o servidor
 const app = express();
 
@@ -15,10 +15,10 @@ app.use(express.json());
 app.use(cors());
 
 //rotas de CRUD que levam para o controller
-app.post('/cadastrar/moradores', createMorador);
-app.get('/exibir/moradores', readMoradores);
-app.put('/moradores/:id', updateMorador);
-app.delete('/moradores/:id', deleteMorador);
+app.post('/moradores/cadastrar', createMorador);
+app.get('/moradores/exibir', readMoradores);
+app.put('/moradores/atualizar/:id', updateMorador);
+app.delete('/moradores/deletar/:id', deleteMorador);
 
 //comando 'npm run dev' para rodar
 try {
