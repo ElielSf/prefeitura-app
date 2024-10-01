@@ -5,5 +5,5 @@ Este aplicativo tem o objetivo promover a criação de cadastros de munícipes p
 Este aplicativo é capaz de:
 - Cadastrar novos munícipes(admin);
 - Listar todos os munícipes cadastrados(admin);
-- Modificar os munícipes(admin);
-- Excluir os munícipes(admin);
+- Modificar os munícipes cadastrados(admin);
+- Excluir os munícipes cadastrados(admin);

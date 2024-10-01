@@ -14,7 +14,7 @@ export default function Control() {
     useEffect(() => {
         const dataFetch = async () => {
             try {
-                const response = await fetch('http://localhost:3000/exibir/moradores', {
+                const response = await fetch('http://localhost:3000/moradores/exibir', {
                     method: 'GET',
                     headers: {
                         'Content-type': 'application/json'
